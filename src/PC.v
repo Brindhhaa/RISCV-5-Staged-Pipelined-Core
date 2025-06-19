@@ -1,16 +1,9 @@
-// Copyright 2023 MERL-DSU
+//This module is a register that keeps track of the PC. 
+//On every rising edge of the clock, the PC updates
+//If the reset signal is 0, then the PC is cleared to 0. 
+//If the reset signal is 1, then the PC is updated to PC_Next
+//The reset is active low. Meaning when it is 0, the PC is reset, when it's 1, it's inactive.
 
-//    Licensed under the Apache License, Version 2.0 (the "License");
-//    you may not use this file except in compliance with the License.
-//    You may obtain a copy of the License at
-
-//        http://www.apache.org/licenses/LICENSE-2.0
-
-//    Unless required by applicable law or agreed to in writing, software
-//    distributed under the License is distributed on an "AS IS" BASIS,
-//    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//    See the License for the specific language governing permissions and
-//    limitations under the License.
 
 module PC_Module(clk,rst,PC,PC_Next);
     input clk,rst;
@@ -26,3 +19,4 @@ module PC_Module(clk,rst,PC,PC_Next);
             PC <= PC_Next;
     end
 endmodule
+
