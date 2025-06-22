@@ -1,16 +1,15 @@
-// Copyright 2023 MERL-DSU
+//This module serves as a small memory block made of 32 registers
+//Each register holds 32 bits
 
-//    Licensed under the Apache License, Version 2.0 (the "License");
-//    you may not use this file except in compliance with the License.
-//    You may obtain a copy of the License at
+//It lets you read 2 registers at the same time, given 2 5-bit addresses A1 and A2. 
+//It then outputs the values stored at those addresses, RD1 and RD2
+//If rst is low, both read outputs are forced to 0
 
-//        http://www.apache.org/licenses/LICENSE-2.0
+//It also lets you write to one register on each clock cycle. 
+//You need to provide a write address, A3, and the data to write WD3
+//If the write enable signal WE3 is high, then writing is enabled. 
+//On the next rising clock edge it stored WD3 into the register stored at A3
 
-//    Unless required by applicable law or agreed to in writing, software
-//    distributed under the License is distributed on an "AS IS" BASIS,
-//    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//    See the License for the specific language governing permissions and
-//    limitations under the License.
 
 module Register_File(clk,rst,WE3,WD3,A1,A2,A3,RD1,RD2);
 
