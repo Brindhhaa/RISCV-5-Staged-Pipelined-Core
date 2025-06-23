@@ -1,4 +1,4 @@
-# Automation Scripts for RISC-V Pipelined Core Simulation
+# Automation Script for RISC-V Pipelined Core Simulation
 
 This folder contains the TCL script that automates the compilation and simulation of the 5-stage pipelined RISC-V processor using ModelSim (compatable with QuestaSim too).
 
