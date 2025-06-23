@@ -1,7 +1,6 @@
 # RISC-V 5-Stage Pipelined Core
 
-This project implements a classic 5-stage pipelined RISC-V processor, designed in Verilog HDL. The pipeline is built for educational and research purposes, demonstrating modern CPU architecture concepts such as instruction pipelining, hazard detection, forwarding, and modular stage design.
-
+This is a project where I implemented a 5-stage pipelined RISC-V based processor, designed in Verilog HDL. 
 ---
 
 ## Architecture Overview
@@ -21,13 +20,14 @@ Each stage is implemented as a separate module, with inter-stage pipeline regist
 ## Pipeline Stages
 
 ### 1️⃣ Instruction Fetch (Fetch_Cycle)
+<img width="361" alt="image" src="https://github.com/user-attachments/assets/114dff61-6424-49a8-b837-c531a1a3fd24" />
 
 **Purpose:**  
 Fetches the next instruction from instruction memory and computes the next PC (Program Counter).
 
+
 **Key modules:**  
 - `PC.v` — Holds the current PC value.
-- `PC_Adder.v` — Computes `PC + 4`.
 - `Instruction_Memory.v` — Provides the instruction word.
 
 **Inputs:**  
@@ -37,15 +37,13 @@ Fetches the next instruction from instruction memory and computes the next PC (P
 
 **Outputs:**  
 - `InstrF` — Fetched instruction.
-- `PCPlus4F` — Next sequential PC.
 - `PCF` — Current PC for the Decode stage.
-
-**Logic:**  
-By default, `PC + 4` is computed to fetch sequential instructions. If a branch is resolved in Execute, `PCSrcE` redirects the PC to `PCTargetE`.
 
 ---
 
 ### 2️⃣ Instruction Decode (Decode_Cycle)
+
+<img width="741" alt="image" src="https://github.com/user-attachments/assets/df600a2b-6cf4-434a-b435-f632742fe4f9" />
 
 **Purpose:**  
 Decodes the instruction, generates control signals, reads register operands, and computes immediate values.
@@ -74,8 +72,12 @@ Splits the instruction fields (opcode, funct3, funct7, rs1, rs2, rd) and determi
 
 ### 3️⃣ Execute (Execute_Cycle)
 
+
+<img width="558" alt="image" src="https://github.com/user-attachments/assets/40748fbe-01b8-48ad-b148-ee8178064350" />
+
 **Purpose:**  
 Performs ALU operations, computes branch conditions, and generates branch decisions.
+
 
 **Key modules:**  
 - `ALU.v` — Arithmetic and logical unit.
@@ -98,6 +100,7 @@ Selects ALU operands based on forwarding logic, performs the operation (add, sub
 ---
 
 ### 4️⃣ Memory Access (Memory_Cycle)
+<img width="365" alt="image" src="https://github.com/user-attachments/assets/9fcf6d79-b251-4463-a259-39a310fdc64f" />
 
 **Purpose:**  
 Handles data memory read and write operations for load/store instructions.
@@ -119,6 +122,7 @@ Executes read or write depending on instruction type (LW, SW). For stores, write
 ---
 
 ### 5️⃣ Writeback (Writeback_Cycle)
+<img width="256" alt="image" src="https://github.com/user-attachments/assets/99a75a65-d2a5-4fee-99c2-6f4abc79ddfa" />
 
 **Purpose:**  
 Chooses the final data to be written back to the register file.
@@ -148,15 +152,4 @@ The pipeline includes a `Hazard_unit.v` module that:
 
 ---
 
-## How to Run
-
-1. Compile using ModelSim/QuestaSim or your preferred simulator.
-2. Use the TCL script in the `automation/` folder to automate compilation, simulation, and waveform generation.
-3. Inspect signals and debug pipeline execution using the integrated waveform viewer.
-
----
-
-## License
-
-This project is for educational purposes. Modify and expand freely to explore advanced pipelining features like branch prediction, caches, or multi-cycle memory.
 
